@@ -10,8 +10,8 @@ class Settings(BaseSettings):
         extra="ignore"
     )
 
-    # Database
-    DATABASE_URL: str = "postgresql+psycopg://postgres:postgres@localhost:5432/ops_assistant"
+    # Database (Default to SQLite zero-setup local database)
+    DATABASE_URL: str = "sqlite+aiosqlite:///./ops_assistant.db"
     
     # Model Provider (Google Gemini)
     GEMINI_API_KEY: Optional[str] = None

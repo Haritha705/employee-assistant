@@ -6,10 +6,12 @@ from app.config import settings
 
 logger = logging.getLogger(__name__)
 
-# Convert standard postgresql:// to postgresql+psycopg:// if needed for async psycopg
+# Normalize driver URLs for SQLAlchemy async engines
 database_url = settings.DATABASE_URL
 if database_url.startswith("postgresql://"):
     database_url = database_url.replace("postgresql://", "postgresql+psycopg://", 1)
+elif database_url.startswith("sqlite://") and not database_url.startswith("sqlite+aiosqlite://"):
+    database_url = database_url.replace("sqlite://", "sqlite+aiosqlite://", 1)
 
 engine = create_async_engine(
     database_url,

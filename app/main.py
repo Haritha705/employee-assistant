@@ -27,7 +27,7 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.warning(
             f"Database auto-initialization could not complete at startup: {e}. "
-            "Please ensure PostgreSQL is accessible or configure a valid DATABASE_URL."
+            "Please check database permissions or verify DATABASE_URL."
         )
     yield
     logger.info("Shutting down application...")
